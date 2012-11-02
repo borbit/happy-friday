@@ -2,6 +2,7 @@
  * Module dependencies.
  */
 var express = require('express')
+  , routes = require('./routes/index')
   , users = require('./routes/users')
   , http = require('http')
   , path = require('path');
@@ -25,7 +26,7 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', users.list);
+app.get('/', routes.index);
 app.get('/users', users.list);
 app.get('/users/:id', users.get);
 app.post('/users', users.add);

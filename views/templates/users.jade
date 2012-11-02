@@ -1,0 +1,17 @@
+script(type="text/plain", id="tpl_users")
+  | <table>
+  |   <tr>
+  |     <th>Firstname</th>
+  |     <th>Lastname</th>
+  |     <th></th>
+  |     <th></th>
+  |   </tr>
+  | <% users.forEach(function(user) { %>
+  |   <tr>
+  |     <td><%=user.firstname%></td>
+  |     <td><%=user.lastname%></td>
+  |     <td><button data-id="<%=user.id%>">Edit</button></td>
+  |     <td><button data-id="<%=user.id%>">Delete</button></td>
+  |   </tr>
+  | <% }); %>
+  | </table>

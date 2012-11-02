@@ -1,13 +1,20 @@
-/*
- * GET users listing.
- */
+var users = [];
+var lastId = 0;
 
 exports.list = function(req, res){
-  res.send("list");
+  res.json(users);
 };
 
 exports.add = function(req, res){
-  res.send("add");
+  var user = {
+    firstname: req.body.firstname
+  , lastname: req.body.lastname
+  , id: lastId
+  };
+
+  users[lastId++] = user;
+
+  res.json(user);
 };
 
 exports.get = function(req, res){

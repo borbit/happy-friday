@@ -1,0 +1,1 @@
+window.ns = {Collections: {}, Models: {}, Views: {}};
