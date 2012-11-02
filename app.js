@@ -27,10 +27,14 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
+app.get('/add', routes.index);
+app.get('/list', routes.index);
+app.get('/edit/*', routes.index);
+
 app.get('/users', users.list);
-app.get('/users/:id', users.get);
 app.post('/users', users.add);
-app.post('/users/:id', users.edit);
+app.get('/users/:id', users.get);
+app.put('/users/:id', users.edit);
 app.delete('/users/:id', users.delete);
 
 http.createServer(app).listen(app.get('port'), function(){

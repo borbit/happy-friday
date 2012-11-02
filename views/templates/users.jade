@@ -1,17 +1,19 @@
 script(type="text/plain", id="tpl_users")
   | <table>
+  | <% if (users.length == 0) { %>
   |   <tr>
-  |     <th>Firstname</th>
-  |     <th>Lastname</th>
-  |     <th></th>
-  |     <th></th>
+  |     <td>There are no users yet.</td>
   |   </tr>
+  | <% } %>
   | <% users.forEach(function(user) { %>
   |   <tr>
   |     <td><%=user.firstname%></td>
   |     <td><%=user.lastname%></td>
-  |     <td><button data-id="<%=user.id%>">Edit</button></td>
-  |     <td><button data-id="<%=user.id%>">Delete</button></td>
+  |     <td><button data-id="<%=user.id%>" class="edit">Edit</button></td>
+  |     <td><button data-id="<%=user.id%>" class="del">Delete</button></td>
   |   </tr>
   | <% }); %>
+  |   <tr>
+  |     <td><button class="add">Add</button></td>
+  |   </tr>
   | </table>

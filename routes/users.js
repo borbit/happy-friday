@@ -9,22 +9,40 @@ exports.add = function(req, res){
   var user = {
     firstname: req.body.firstname
   , lastname: req.body.lastname
-  , id: lastId
+  , id: lastId++
   };
-
-  users[lastId++] = user;
-
+  users.push(user);
   res.json(user);
 };
 
 exports.get = function(req, res){
-  res.send("get");
+  for (var i = users.length; i--;) {
+    if (users[i].id == req.params.id) {
+      res.json(users[i]);
+      break;
+    }
+  }
 };
 
 exports.edit = function(req, res){
-  res.send("edit");
+  var user;
+  for (var i = users.length; i--;) {
+    if (users[i].id == req.params.id) {
+      user = users[i];
+      break;
+    }
+  }
+  user.firstname = req.body.firstname;
+  user.lastname = req.body.lastname;
+  res.json(user);
 };
 
 exports.delete = function(req, res){
-  res.send("delete");
+  for (var i = users.length; i--;) {
+    if (users[i].id == req.params.id) {
+      users.splice(i, 1);
+      break;
+    }
+  }
+  res.end();
 };

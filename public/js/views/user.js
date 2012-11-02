@@ -1,7 +1,6 @@
 ns.Views.User = Backbone.View.extend({
   events: {
     'click button': 'save'
-  , 'keypress input': 'reset'
   },
 
   initialize: function() {
@@ -17,6 +16,9 @@ ns.Views.User = Backbone.View.extend({
       self.$el.find('.error').html(error);
       self.$el.find('.error').show();
     });
+    this.model.on('change', function() {
+      self.render();
+    });
   },
 
   render: function() {
@@ -30,7 +32,7 @@ ns.Views.User = Backbone.View.extend({
     var $error = this.$el.find('.error')
       
     $button.removeAttr('disabled');
-    $button.html('Edit');
+    $button.html('Save');
 
     $error.html();
     $error.hide();
@@ -38,7 +40,6 @@ ns.Views.User = Backbone.View.extend({
 
   save: function() {
     var $button = this.$el.find('button');
-
     var data = {
       firstname: $.trim(this.$el.find('input[name="firstname"]').val())
     , lastname: $.trim(this.$el.find('input[name="lastname"]').val())
@@ -47,8 +48,10 @@ ns.Views.User = Backbone.View.extend({
     $button.attr('disabled', true);
     $button.html('Loading...');
 
+    var self = this;
+
     this.model.save(data, {success: function() {
-      $button.html('Saved!');
+      self.trigger('save');
     }});
   }
 });
